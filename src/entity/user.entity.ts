@@ -20,7 +20,7 @@ export class User {
   @Column()
   password: string;
 
-  @OneToMany(() => Transaction, transactions => transactions.user)
+  @OneToMany(() => Transaction, transaction => transaction.user)
   transactions: Transaction[];
 
   @CreateDateColumn()

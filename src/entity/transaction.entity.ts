@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn, UpdateDateColumn, JoinColumn } from 'typeorm';
 import { User } from './user.entity';
 
 @Entity()
@@ -16,6 +16,7 @@ export class Transaction {
   payment_method: string;
 
   @ManyToOne(() => User, user => user.transactions)
+  @JoinColumn({ name: 'userId' })
   user: User;
 
   @CreateDateColumn()
