@@ -12,9 +12,16 @@ export class TransactionController {
     @UseGuards(AuthGuard)
     @Post('/create')
     async createTransaction(@Body() transactionData, @Req() req) {
-        console.log("user", req.user.sub)
-        transactionData.user = req.user.sub
-        return await this.transactionService.create(transactionData)
+        try {
+            transactionData.user = req.user.sub
+            return await this.transactionService.create(transactionData)
+        } catch (error) {
+            return {
+                message : "Sorry unable to create transaction",
+                error : error,
+                success : false
+            }
+        }
     }
 
     @UseGuards(AuthGuard)
